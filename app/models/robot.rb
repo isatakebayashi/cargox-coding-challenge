@@ -8,6 +8,7 @@ class Robot
   def initialize(id, initial_data, surface)
     x = initial_data.split[0]
     y = initial_data.split[1]
+
     @id="#{id}"
     @direction = Direction.new(initial_data.split[2])
     @surface = surface
@@ -23,7 +24,7 @@ class Robot
       next unless valid_instruction?(i)
       @direction.change(i) if is_change_direction?(i)
       if is_position_change?(i)
-        moved = @position.move(@direction)
+        moved = @position.move(@direction.current)
         puts "Invalid move for #{direction.current} on position #{@position.x}, #{@position.y}" unless moved
       end
     end
