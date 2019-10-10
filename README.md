@@ -3,7 +3,7 @@
 
 ![File selection image](doc/file_select.png)
 
-![Processing result](doc/file_select.png)
+![Processing result](doc/results.png)
 
 
 ## Using the command line
