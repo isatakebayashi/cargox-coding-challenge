@@ -6,7 +6,6 @@ require 'pry-byebug'
 
 class MarsExploreController < ApplicationController
   get '/' do
-    # erb :index
     erb :index, :layout => :layout
   end
 

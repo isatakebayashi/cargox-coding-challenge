@@ -6,4 +6,3 @@ WORKDIR /app
 COPY . .
 RUN bundle install
 EXPOSE 3000
-
