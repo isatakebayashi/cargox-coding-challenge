@@ -1,4 +1,4 @@
-require_relative 'mars_explore'
+require_relative 'app/mars_explore'
 
 if ARGV.count != 1
   puts 'Usage: ruby mars_explore_cli.rb <world_description_file>'

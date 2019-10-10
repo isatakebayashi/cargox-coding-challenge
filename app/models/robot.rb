@@ -2,25 +2,36 @@ require_relative 'direction'
 require_relative 'position'
 
 class Robot
+  class InvalidRobotCoordinatesError < StandardError;end
+
   attr_reader :position,:direction, :id
   VALID_INSTRUCTIONS = ['L', 'R', 'M']
 
   def initialize(id, initial_data, surface)
-    x = initial_data.split[0]
-    y = initial_data.split[1]
-
     @id="#{id}"
-    @direction = Direction.new(initial_data.split[2])
     @surface = surface
+
+    x, y, dir = parse_intial_data(initial_data)
+
     @position = Position.new(x, y, @surface)
+    @direction = Direction.new(dir)
   end
 
   def parse_intial_data(data)
+    rs = /\s*(?<x>\d+)\s+(?<y>\d+)\s+(?<dir>[A-Z])\s*$/
+    match = rs.match(data)
+    
+    raise InvalidRobotCoordinatesError if match.nil?
+
+    x = match[:x].to_i
+    y = match[:y].to_i
+    dir = match[:dir]
+
+    return x, y, dir
   end
 
   def handle_instructions(instructions)
-    x = instructions.split("")
-    x.each do |i|
+    instructions.each_char do |i|
       next unless valid_instruction?(i)
       @direction.change(i) if is_change_direction?(i)
       if is_position_change?(i)

@@ -1,13 +1,26 @@
 class Surface
+  class InvalidSurfaceCoordinatesError < StandardError;end
+
   attr_reader :top_x, :top_y, :bottom_x, :bottom_y, :robots
 
   def initialize(coordinates)
     @bottom_x = 0
     @bottom_y = 0
-    @top_x = coordinates.split[0].to_i
-    @top_y = coordinates.split[1].to_i
     @robots = []
+
+    parse_coordinates(coordinates)
+    
     puts "Created surface with top_x: #{top_x} and top_y: #{top_y}"
+  end
+
+  def parse_coordinates(data)
+    rs = /\s*(?<x>\d+)\s+(?<y>\d+)\s*$/
+    coordinates = rs.match(data)
+    
+    raise InvalidSurfaceCoordinatesError if coordinates.nil?
+    
+    @top_x = coordinates[:x].to_i
+    @top_y = coordinates[:y].to_i
   end
 
   def to_h
