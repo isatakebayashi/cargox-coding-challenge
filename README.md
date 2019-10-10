@@ -8,7 +8,7 @@
 ## Using the command line
 
 ```bash
-  ruby mars_explore_cli.rb <file_with_instructions.txt>
+  ruby mars_explore_cli.rb sample.txt
 ```
 
 ## To init
