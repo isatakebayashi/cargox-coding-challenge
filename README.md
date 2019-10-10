@@ -14,5 +14,5 @@
 ## To init
 
 ```bash
-  docker compose up
+  docker-compose up
 ```
