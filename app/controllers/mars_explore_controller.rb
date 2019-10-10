@@ -1,10 +1,10 @@
 require_relative 'application_controller'
-require_relative '../mars_explore'
+require_relative '../lib/mars_explore'
 require_relative '../models/mars_surface'
 
 require 'pry-byebug'
 
-class ExampleController < ApplicationController
+class MarsExplorerController < ApplicationController
   get '/' do
     erb :index
   end

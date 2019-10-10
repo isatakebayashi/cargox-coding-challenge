@@ -1,5 +1,5 @@
-require_relative 'models/surface'
-require_relative 'models/robot'
+require_relative '../models/surface'
+require_relative '../models/robot'
 
 class MarsExplore
   def self.explore(file)
@@ -21,7 +21,6 @@ class MarsExplore
         current_robot.handle_instructions(line)
         surface.set_robot_location(current_robot)
         puts "Robot #{current_robot.id} stopped at x: #{current_robot.position.x}, y: #{current_robot.position.y}, direction: #{current_robot.direction.current}"
-        puts
         robot_id += 1
       end
     end

@@ -1,11 +1,10 @@
 require 'sinatra/base'
-require_relative 'app/controllers/example_controller'
+require_relative 'app/controllers/mars_explore_controller'
 require 'mongoid'
 
 Dir.glob('./{models,helpers,controllers}/*.rb').each { |file| require file }
 
-# map('/example') { run ExampleController }
-map('/') { run ExampleController }
+map('/') { run MarsExplorerController }
 
 Mongoid.configure do |config|
   config.clients.default = {

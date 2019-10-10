@@ -16,12 +16,12 @@ describe Position do
 
     context 'when can not move the robot' do
       let(:surface) { Surface.new('5 5') }
-      let(:position) { described_class.new('1', '1', surface) }
+      let(:position) { described_class.new('5', '5', surface) }
 
       it 'does not update the robot position' do
         expect {
-          position.move('S')
-        }.not_to change { position.y }.from(1)
+          position.move('W')
+        }.not_to change { position.y }.from(5)
       end
     end
   end
