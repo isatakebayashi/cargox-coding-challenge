@@ -2,8 +2,6 @@ require_relative 'application_controller'
 require_relative '../lib/mars_explore'
 require_relative '../models/mars_surface'
 
-require 'pry-byebug'
-
 class MarsExploreController < ApplicationController
   get '/' do
     erb :index, :layout => :layout
@@ -39,12 +37,12 @@ class MarsExploreController < ApplicationController
   end
 
   error Surface::InvalidSurfaceCoordinatesError do
-    @error = 'Nao foi possivel encontrar coordenadas de superficie no arquivo'
+    @error = 'Não foi possível encontrar coordenadas de superficie no arquivo'
     erb :error, :layout => :layout
   end
 
   error Robot::InvalidRobotCoordinatesError do
-    @error = 'Nao foi possivel validar as coordenadas para esse robô'
+    @error = 'Não foi possível validar as coordenadas para esse robô'
     erb :error, :layout => :layout
   end
 end
