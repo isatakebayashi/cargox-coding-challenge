@@ -16,11 +16,10 @@ class MarsExplore
     file.each_with_index do |line, index|
       if index % 2 == 0
         current_robot = Robot.new(robot_id, line, surface)
-        puts "Created Robot #{current_robot.id} at x: #{current_robot.position.x}, y: #{current_robot.position.y}, direction: #{current_robot.direction.current}"
       else
         current_robot.handle_instructions(line)
         surface.set_robot_location(current_robot)
-        puts "Robot #{current_robot.id} stopped at x: #{current_robot.position.x}, y: #{current_robot.position.y}, direction: #{current_robot.direction.current}"
+        puts "#{current_robot.position.x} #{current_robot.position.y} #{current_robot.direction.current}"
         robot_id += 1
       end
     end

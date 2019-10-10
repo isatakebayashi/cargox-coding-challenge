@@ -4,9 +4,10 @@ require_relative '../models/mars_surface'
 
 require 'pry-byebug'
 
-class MarsExplorerController < ApplicationController
+class MarsExploreController < ApplicationController
   get '/' do
-    erb :index
+    # erb :index
+    erb :index, :layout => :layout
   end
 
   post '/upload' do
@@ -30,6 +31,21 @@ class MarsExplorerController < ApplicationController
   get '/show' do
     id = params[:id]
     @surface = MarsSurface.find(id)
-    erb :show
+    erb :show, :layout => :layout
+  end
+
+  error do
+    @error = 'Erro desconhecido'
+    erb :error, :layout => :layout
+  end
+
+  error Surface::InvalidSurfaceCoordinatesError do
+    @error = 'Nao foi possivel encontrar coordenadas de superficie no arquivo'
+    erb :error, :layout => :layout
+  end
+
+  error Robot::InvalidRobotCoordinatesError do
+    @error = 'Nao foi possivel validar as coordenadas para esse robô'
+    erb :error, :layout => :layout
   end
 end

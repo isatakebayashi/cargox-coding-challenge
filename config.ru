@@ -4,11 +4,12 @@ require 'mongoid'
 
 Dir.glob('./{models,helpers,controllers}/*.rb').each { |file| require file }
 
-map('/') { run MarsExplorerController }
+map('/') { run MarsExploreController }
 
 Mongoid.configure do |config|
+  mongo_host = ENV.fetch('MONGO_HOST', 'localhost')
   config.clients.default = {
-    hosts: ['localhost:27017'],
+    hosts: ["#{mongo_host}:27017"],
     database: 'mars_db',
   }
 
