@@ -1,0 +1,8 @@
+<div class="container mt-5" style="width: 600px;">
+  <ul class="list-group">
+    <li class="list-group-item">Posição dos Robôs:</li>
+    <% @surface.robots.each do |r| %>
+      <li class="list-group-item list-group-item-primary"> Robô <%= r[:id] %>: <%= r[:x] %> <%= r[:y] %> <%= r[:dir] %></li>
+    <% end %>
+  </ul>
+</div>

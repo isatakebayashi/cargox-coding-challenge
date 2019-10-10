@@ -1,0 +1,21 @@
+version: '2'
+services:
+  mongodb:
+    image: 'mongo:latest'
+    ports:
+      - '27017:27017'
+  web:
+    image: ruby:2.5
+    build:
+      context: .
+    working_dir: /app
+    environment:
+      MONGO_HOST: 'mongodb'
+    command: >
+        /bin/sh -c "APP_ENV=production rackup --host 0.0.0.0 --port 3000"
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
