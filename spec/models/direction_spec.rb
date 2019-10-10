@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../direction'
+require_relative '../../models/direction'
  
 describe Direction do
   describe '#change' do

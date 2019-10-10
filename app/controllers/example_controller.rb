@@ -1,5 +1,7 @@
 require_relative 'application_controller'
 require_relative '../mars_explore'
+require_relative '../models/mars_surface'
+
 require 'pry-byebug'
 
 class ExampleController < ApplicationController
@@ -9,13 +11,25 @@ class ExampleController < ApplicationController
 
   post '/upload' do
     file = params[:file][:tempfile]
-    mars = MarsExplore.explore(file)
-    args = JSON.dump(mars.to_h)
-    redirect to("/result?args=#{args}")
+    mars_surface = MarsExplore.explore(file).to_h
+
+    puts mars_surface.to_h
+    
+    stored_surface = MarsSurface.new(
+      {
+        top_x: mars_surface[:x],
+        top_y: mars_surface[:y],
+        robots: mars_surface[:robots]
+      }
+    )
+    stored_surface.save!
+    
+    redirect to("/show?id=#{stored_surface.id}")
   end
 
-  get '/result' do
-    @data = JSON.parse(params[:args])
-    erb :result
+  get '/show' do
+    id = params[:id]
+    @surface = MarsSurface.find(id)
+    erb :show
   end
 end

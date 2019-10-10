@@ -11,7 +11,7 @@ class Surface
   end
 
   def to_h
-    robots.map do |robot|
+    robot_list = robots.map do |robot|
       {
         id: robot.id,
         x: robot.position.x,
@@ -19,6 +19,12 @@ class Surface
         dir: robot.direction.current
       }
     end
+    
+    {
+      x: top_x,
+      y: top_y,
+      robots: robot_list
+    } 
   end
 
   def set_robot_location(robot)
